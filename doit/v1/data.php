@@ -9,27 +9,24 @@ $response = array();
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(
-		isset($_POST['username']) and 
-			isset($_POST['email']) and 
-				isset($_POST['password']))
+		isset($_POST['task']) and 
+			isset($_POST['date']) and 
+				isset($_POST['time']))
 		{
 		//operate the data further 
 
 		$db = new DbOperations(); 
 
-		$result = $db->createUser( 	$_POST['username'],
-									$_POST['password'],
-									$_POST['email']
+		$result = $db->createData( 	$_POST['task'],
+									$_POST['date'],
+									$_POST['time']
 								);
 		if($result == 1){
 			$response['error'] = false; 
-			$response['message'] = "User registered successfully";
+			$response['message'] = "Task add successfully";
 		}elseif($result == 2){
 			$response['error'] = true; 
 			$response['message'] = "Some error occurred please try again";			
-		}elseif($result == 0){
-			$response['error'] = true; 
-			$response['message'] = "It seems you are already registered, please choose a different email and username";						
 		}
 
 	}else{
